@@ -13,17 +13,68 @@
 </head>
     <body>
 <!-- nav bar -->
-        <div class="container-fluid">
-        <nav>
-        <ul>
-            <li>Home</li>
-            <li>Menu</li>
-            <li>Combo Meals</li>
-            </ul>
-        </nav>
+        <style>
+            .navbar{
+                background-color:  var(--brand-color);
+            }
+            .nav-item{
+                
+            }
+            .nav-link{
+                font-size: 1.5em;
+                color:white;
+            }
+            .nav-item:hover{
+                background-color: white;
+                color: red;
+            }
+            .nav-link:hover{
+                color: red;
+                
+            }
+            .btn-outline{
+                border: 1px solid white;
+                padding: 0 1em;
+            }
+            .btn-outline:hover{
+                background-color: white;
+                
+            }
+        
+        
+        </style>
+        <div class="container-fluid ">
+            
+            
+<nav class="navbar navbar-expand-md px-2 py-0 d-flex">
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="collapsibleNavbar">
+<ul class="navbar-nav flex-grow-1">
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('index') }}">Home</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('programs') }}">Menu</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('information') }}">Combos</a>
+</li>
+</ul>
+
+<div>
+<a href="{{ url_for('log_in') }}" class="nav-link btn btn-outline">Log in</a>
+</div>
+</div>
+</nav>
+</div>
+        
+ 
+
 <!-- banner -->
         <img class="img-fluid" src="banner.svg">
-            </div>
+          
         
 
 <!-- header and content -->
