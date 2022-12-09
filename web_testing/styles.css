@@ -1,0 +1,32 @@
+:root{
+    /* a css variable */
+    --bs-body-bg: rgb(245, 238, 193);
+    --brand-color: rgb(205,66,39);
+}
+
+body{
+    font-size:100%;
+}
+
+
+h1{
+    color: rgb(255,255,255);
+    background-color: var(--brand-color);
+    font-family: cursive;
+    font-size: 6em;
+}
+
+.body-text{
+    font-size: 2em;
+}
+
+.body-italics{
+    font-style:italic;
+    color: var(--brand-color);
+}
+
+.part-img{
+    max-width: 75%;
+    margin:auto;
+    display: block;
+}

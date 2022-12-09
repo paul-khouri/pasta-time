@@ -1,0 +1,6 @@
+Set up style
+Root example
+How to style elements inline page external
+Use external but can work locally
+
+Look at inspector
