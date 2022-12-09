@@ -1,23 +1,48 @@
 :root{
     /* a css variable */
-    --bs-body-bg: rgb(245, 238, 193);
+    --bs-body-bg: rgb(255, 255, 255);
     --brand-color: rgb(205,66,39);
 }
 
 body{
     font-size:100%;
+    margin:0;
 }
 
 
 h1{
-    color: rgb(255,255,255);
-    background-color: var(--brand-color);
+    color: rgb(0,0,0);
     font-family: cursive;
-    font-size: 6em;
+    font-size: 4em;
+    text-align: center;
+    margin: 0;
+    overflow: hidden;
+   
+}
+h1 span{
+     background-color: white;
+    padding:0 1em;
+    
+}
+
+.quote{
+    text-align: center;
+    font-size: 2em;
+    font-family: cursive;
+    padding: 1em 1em;
+}
+
+.line-bg{
+      background-image: url("black-01.svg");
+        background-repeat: repeat-x;
+    background-position: center;
+    background-size: 4px;
+    margin-bottom: 1em;
 }
 
 .body-text{
     font-size: 2em;
+    text-align: center;
 }
 
 .body-italics{
@@ -29,4 +54,47 @@ h1{
     max-width: 75%;
     margin:auto;
     display: block;
+}
+
+.container-fluid{
+    margin:0;
+    /*--bs-gutter-x:0;*/
+    border: 0px solid green;
+    padding:0;
+}
+
+.container{
+border: 0px solid green;
+ 
+  
+}
+.row{
+    /*background-color: brown;*/
+    /* fix for overflow */
+    margin:auto;
+}
+.row div{
+   
+    /*background-color: aqua;*/
+}
+
+footer{
+    background-color: var(--brand-color);
+    margin: 2em 0em 0em 0em;
+    
+}
+
+
+@media only screen and (max-width: 768px) {
+    h1{
+        font-size: 4em;
+    }
+    .container{
+        max-width: 760px;
+        background-color: antiquewhite;
+    }
+    .line-bg{
+        background-image: none;
+    }
+
 }
