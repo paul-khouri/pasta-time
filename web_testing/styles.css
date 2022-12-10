@@ -1,43 +1,51 @@
+
+
+
+
 :root{
     /* a css variable */
-    --bs-body-bg: rgb(255, 255, 255);
+    --bs-body-bg: rgb(250, 247, 215);
     --brand-color: rgb(205,66,39);
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Martel:wght@200;700&display=swap');
+
 
 body{
     font-size:100%;
     margin:0;
+    font-family: 'Martel', serif;
 }
 
 
 h1{
     color: rgb(0,0,0);
-    font-family: cursive;
     font-size: 4em;
     text-align: center;
     margin: 0;
-    overflow: hidden;
-   
 }
 h1 span{
-     background-color: white;
+    background-color:var(--bs-body-bg);
     padding:0 1em;
-    
 }
 
 .quote{
+    
     text-align: center;
     font-size: 2em;
-    font-family: cursive;
+    font-style: italic;
     padding: 1em 1em;
+    background-color: rgb(255,255,255);
+    color: rgb(150,150,150);
+  
 }
 
 .line-bg{
-      background-image: url("black-01.svg");
-        background-repeat: repeat-x;
+    background-image: url("black-01.svg");
+    background-repeat: repeat-x;
     background-position: center;
     background-size: 4px;
-    margin-bottom: 1em;
+    margin:0 auto 2em auto;
 }
 
 .body-text{
@@ -45,8 +53,7 @@ h1 span{
     text-align: center;
 }
 
-.body-italics{
-    font-style:italic;
+.body-italics{ 
     color: var(--brand-color);
 }
 
@@ -57,31 +64,57 @@ h1 span{
 }
 
 .container-fluid{
-    margin:0;
-    /*--bs-gutter-x:0;*/
+    margin:0 0 2em 0;
     border: 0px solid green;
     padding:0;
 }
-
-.container{
-border: 0px solid green;
- 
-  
+/* -- spacing --*/
+.container-lg{
+margin:0 auto 2em auto;
 }
 .row{
-    /*background-color: brown;*/
     /* fix for overflow */
-    margin:auto;
-}
-.row div{
-   
-    /*background-color: aqua;*/
+   margin:auto;
+    background-color: rgb(255,255,255);
+    padding: 1em 1em;
 }
 
 footer{
-    background-color: var(--brand-color);
-    margin: 2em 0em 0em 0em;
-    
+    background-color: var(--brand-color);  
+}
+footer .container{
+    margin: 0 auto;
+    text-align: center;
+    padding: 1em 0;
+    color: rgb(255,255,255);
+}
+
+/* --------- navigation --------- */
+.navbar{
+    background-color:  var(--brand-color);
+}
+.nav-item{
+
+}
+.nav-link{
+    font-size: 1.5em;
+    color:white;
+}
+.nav-item:hover{
+    background-color: white;
+    color: red;
+}
+.nav-link:hover{
+    color: red;
+
+}
+.btn-outline{
+    border: 1px solid white;
+    padding: 0 1em;
+}
+.btn-outline:hover{
+    background-color: white;
+
 }
 
 
@@ -91,7 +124,6 @@ footer{
     }
     .container{
         max-width: 760px;
-        background-color: antiquewhite;
     }
     .line-bg{
         background-image: none;

@@ -14,32 +14,7 @@
     <body>
 <!-- nav bar -->
         <style>
-            .navbar{
-                background-color:  var(--brand-color);
-            }
-            .nav-item{
-                
-            }
-            .nav-link{
-                font-size: 1.5em;
-                color:white;
-            }
-            .nav-item:hover{
-                background-color: white;
-                color: red;
-            }
-            .nav-link:hover{
-                color: red;
-                
-            }
-            .btn-outline{
-                border: 1px solid white;
-                padding: 0 1em;
-            }
-            .btn-outline:hover{
-                background-color: white;
-                
-            }
+
         
         
         </style>
@@ -53,41 +28,41 @@
 <div class="collapse navbar-collapse" id="collapsibleNavbar">
 <ul class="navbar-nav flex-grow-1">
 <li class="nav-item">
-<a class="nav-link" href="{{ url_for('index') }}">Home</a>
+<a class="nav-link" href="">Home</a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="{{ url_for('programs') }}">Menu</a>
+<a class="nav-link" href="">Menu</a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="{{ url_for('information') }}">Combos</a>
+<a class="nav-link" href="">Combos</a>
 </li>
 </ul>
 
 <div>
-<a href="{{ url_for('log_in') }}" class="nav-link btn btn-outline">Log in</a>
+<a href="" class="nav-link btn btn-outline">Log in</a>
 </div>
 </div>
 </nav>
+            
+  <img class="img-fluid" src="banner.svg">           
 </div>
         
  
 
 <!-- banner -->
-        <img class="img-fluid" src="banner.svg">
+       
           
         
 
 <!-- header and content -->
-        <div class="container quote">
-            
-        From scratch. Our fresh pasta
-            is made daily in-house using free range eggs & NZ Semolina.
+        <div class="container-lg">
+        <div class="quote">From scratch. Our fresh pasta
+            is made daily in-house using free range eggs & NZ Semolina.</div>
         </div>
-       
-    <div class="line-bg">    <h1> <span>Our Pastaria</span> </h1></div>
+           <div class="line-bg">    <h1> <span>Our Pastaria</span> </h1></div>
         
-       
-             <div class="container p-0 border-1">
+        
+             <div class="container-lg">
             
             <div class="row align-items-center ">
             <div class="col-lg-7 justify-content-center">
@@ -106,10 +81,19 @@
             
             
             </div>
+        
+            
+         
+        
+     
     
 <!-- footer -->
         <footer>
-        1789 Pasteria
+    <div class="container">
+        <h3> 1789 Pastaria</h3>
+        <p>made with love</p>
+        <div>&copy; 1789</div>
+    </div>
         </footer>
         
     
