@@ -11,8 +11,8 @@ __pycache__
 venv
 
 # big media files
-.ai
-.psd
-.heic
-.mov
-.pdf
+*.ai
+*.psd
+*.heic
+*.mov
+*.pdf
