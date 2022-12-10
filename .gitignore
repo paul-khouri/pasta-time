@@ -9,3 +9,9 @@ __pycache__
 
 # Ignore virtual environment
 venv
+
+# big media files
+.ai
+.psd
+.heic
+.mov
