@@ -1,0 +1,140 @@
+
+
+
+
+:root{
+    /* a css variable */
+    --bs-body-bg: rgba(255, 255, 255,0);
+    --brand-pale-blue: rgb(226,243,247);
+   
+   
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
+
+
+body{
+    font-size:100%;
+}
+
+
+h1{
+    color: rgb(0,0,0);
+    font-size: 4em;
+    text-align: center;
+    font-weight: 600;
+    margin: 0;
+}
+
+
+.quote{
+    
+    text-align: center;
+    font-size: 2em;
+    font-style: italic;
+    padding: 1em 1em;
+    color: rgb(150,150,150);
+  
+}
+
+.line-bg{
+    background-image: url("black-01.svg");
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: 4px;
+    margin:0 auto 2em auto;
+}
+
+.body-text{
+    font-size: 2em;
+    text-align: center;
+}
+
+
+
+.part-img{
+    max-width: 75%;
+    margin:auto;
+    display: block;
+}
+.img-padding{
+    margin: 1em;
+}
+
+.container-fluid{
+    margin:0 0 0em 0;
+    overflow: auto;
+
+    padding:0;
+}
+/* -- spacing --*/
+.container-lg{
+margin:0 auto 2em auto;
+    border: 0px solid blue;
+}
+
+.container-spot-bg{
+    background-image: url("greens_spot.svg");
+    background-position: right;
+    background-position: bottom;
+     background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: white;
+}
+.row{
+    /* fix for overflow */
+   margin:auto;
+    padding: 1em 1em;
+}
+
+footer{
+    background-color: var(--brand-pale-blue); 
+      margin: 0 auto;
+    text-align: center;
+    padding: 1em 0;
+    color: rgb(255,255,255);
+
+}
+
+
+/* --------- navigation --------- */
+.navbar{
+    
+}
+
+.nav-item{
+
+}
+.nav-link{
+    font-size: 1.5em;
+    color:black;
+    border-bottom: 1px solid black;
+}
+.nav-item:hover{
+    background-color:var(--brand-pale-blue);
+}
+
+.btn-outline{
+    border: 1px solid var(--brand-pale-blue);
+    padding: 0 1em;
+}
+.btn-outline:hover{
+    background-color:var(--brand-pale-blue);
+
+}
+
+
+@media only screen and (max-width: 768px) {
+    h1{
+        font-size: 4em;
+    }
+    .container{
+        max-width: 760px;
+    }
+    .line-bg{
+        background-image: none;
+    }
+
+}

@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+1789 Menus
+{% endblock %}
+
+{% block bannerpath %}
+{{ url_for('static', filename='images/small_banner.svg') }}
+{% endblock %}
+
+{% block content %}
+
+<div class="container-lg">
+  <h1>Our Menu</h1>
+
+{% set type=namespace(item=menu[0][3]) %}
+<h2> {{type.item}}</h2>
+
+{% for row in menu %}
+    {% if row[3] != type.item %}
+        {% set type.item=row[3] %}
+        <h2>{{type.item}}</h2>
+    {% endif %}
+
+<p class="food-title"> {{ row[0] }}</p>
+<p class="food-description">{{ row[1] }}</p>
+<p class="food-description">{{ "$ {:.2f}".format(row[2]) }}</p>
+
+{% endfor %}
+    </div>
+{% endblock %}

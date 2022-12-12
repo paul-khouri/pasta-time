@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+1789 Welcome
+{% endblock %}
+
+{% block bannerpath %}
+{{ url_for('static', filename='images/big_banner.svg') }}
+{% endblock %}
+
+{% block content %}
+<!-- header and content -->
+        <div class="container-lg">
+            <div class="quote">From scratch. Our fresh pasta
+                is made daily in-house using free range eggs & NZ Semolina.</div>
+            </div>
+        <div class="container-lg">
+            <div class="row align-items-center ">
+                <div class="col-lg-7 justify-content-center">
+                    <h1>Our Place</h1>
+                    <p class="body-text">1154 is a fast, fresh, house made pasta & organic wine restaurant set in a modern,
+                    lively Cuba street eatery. Our aim is to source the best ingredients we
+                    can to make the best possible version of classic pasta dishes you already know & love.
+                    </p>
+                </div>
+                <div class="col-lg-5">
+                    <img class="img-fluid part-img" src="static/images/web_pic_bw.png">
+                </div>
+            </div>
+        </div>
+{% endblock %}

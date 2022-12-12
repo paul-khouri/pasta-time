@@ -5,16 +5,22 @@
 :root{
     /* a css variable */
     --bs-body-bg: rgb(250, 247, 215);
-    --brand-color: rgb(205,66,39);
+    --brand-green: rgb(167,209,202);
+    --brand-green-pale: rgb(223,237,224);
+    --brand-paper: rgb(253,251,227);
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Martel:wght@200;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
 
 
 body{
     font-size:100%;
     margin:0;
-    font-family: 'Martel', serif;
+    font-family: 'Cormorant Garamond', serif;
+    background-color: var(--brand-paper);
+
 }
 
 
@@ -22,6 +28,7 @@ h1{
     color: rgb(0,0,0);
     font-size: 4em;
     text-align: center;
+    font-weight: 600;
     margin: 0;
 }
 h1 span{
@@ -53,9 +60,7 @@ h1 span{
     text-align: center;
 }
 
-.body-italics{ 
-    color: var(--brand-color);
-}
+
 
 .part-img{
     max-width: 75%;
@@ -80,7 +85,7 @@ margin:0 auto 2em auto;
 }
 
 footer{
-    background-color: var(--brand-color);  
+    background-color: var(--brand-green);  
 }
 footer .container{
     margin: 0 auto;
@@ -91,21 +96,22 @@ footer .container{
 
 /* --------- navigation --------- */
 .navbar{
-    background-color:  var(--brand-color);
+    background-color:  var(--brand-green);
+    border-bottom: 1px solid black;
 }
 .nav-item{
 
 }
 .nav-link{
     font-size: 1.5em;
-    color:white;
+    color:black;
 }
 .nav-item:hover{
-    background-color: white;
-    color: red;
+    background-color:var(--brand-green-pale);
+    color: var(--brand-green);
 }
 .nav-link:hover{
-    color: red;
+    color: var(--brand-green);
 
 }
 .btn-outline{
@@ -113,7 +119,7 @@ footer .container{
     padding: 0 1em;
 }
 .btn-outline:hover{
-    background-color: white;
+    background-color:var(--brand-green-pale);
 
 }
 
