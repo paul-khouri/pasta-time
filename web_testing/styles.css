@@ -1,0 +1,147 @@
+
+:root{
+--brand-paper: rgb(253,251,227);
+--brand-green: rgb(167,209,202); 
+    /* hover color for text */
+--brand-green-pale: rgb(223,237,224);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
+body{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 100%;
+    background-color: var(--brand-paper);
+    margin:0;  
+}
+
+/* ---- text ------ */
+.quote{
+    text-align: center;
+    font-size: 2em;
+    font-style: italic;
+    padding: 1em 1em;
+    color: rgb(150,150,150);
+}
+
+.body-text{
+    font-size: 2em;
+    text-align: center;
+}
+
+h1{
+    font-size: 4em;
+    text-align: center;
+    font-weight: 600;
+    margin: 0;
+}
+/* ---------- */
+
+
+/* -- layout --- */
+
+.container-fluid{
+    border: 0px solid blue;
+    padding:0;
+    
+}
+
+.container-lg{
+    border: 0px solid pink;
+    background-color: rgb(255,255,255);
+   
+    overflow: auto;
+    margin-bottom: 2.5em;
+    
+}
+
+.col-lg-7, .col-lg-5{
+    border: 0px solid red;
+}
+.row{
+    border: 0px solid blue;
+    padding: 1em 0 1em 0;
+}
+
+/* ---------- */
+
+
+/* -- images --- */
+.part-img{
+    max-width: 75%;
+    margin:auto;
+    display: block;
+}
+/* ------- */
+
+.footer-content{
+    background-color: var(--brand-green);
+    text-align: center;
+    padding: 0.5em 0 0.5em 0;
+    color:white;
+    
+}
+
+
+.footer-content p:first-child{
+    font-weight: 600;
+    font-size: 1.5em;
+}
+
+/* -- navigation --- */
+.navbar{
+background-color:  var(--brand-green);
+border-bottom: 1px solid black; 
+}
+
+.nav-item:hover{
+ background-color:var(--brand-green-pale); 
+}
+
+.nav-link{
+font-size: 1.5em;
+color:black;
+}
+
+.nav-link:hover{
+color: var(--brand-green);
+}
+
+.btn-outline{
+    border: 1px solid white;
+    padding: 0 1em;
+}
+
+.btn-outline:hover{
+background-color:var(--brand-green-pale);
+
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+    
+    .body-text , .quote{
+        font-size:1.5em;
+    }
+    
+    h1{
+        font-size: 2em;
+    }
+ 
+}
+
+
+
+@media only screen and (max-width: 576px) {
+    
+ 
+    .part-img{
+        max-width: 100%;
+    }
+
+
+
+}
+
