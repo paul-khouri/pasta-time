@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Join up
+{% endblock %}
+
+{% block banner %}
+static/images/small_banner.svg
+{% endblock %}
+
+
+{% block content %}
+<div class="container-lg">
+<p class="body-text">
+Join us to receive special offers, invitations to tasting nights and groovy Wellington gossip!
+</p>
+</div>
+<div class="container-lg p-3">
+    <form action="{{ url_for('signup') }}" method="POST">
+       <div>
+           <label for="firstname" class="form-label">First Name</label>
+           <input type="text" class="form-control" id="firstname" name="firstname" placeholder="" value="{{firstname}}" >
+       </div>
+       <div>
+           <label for="secondname" class="form-label">Second Name</label>
+           <input type="text" class="form-control" id="secondname" name="secondname" placeholder="" value="{{secondname}}" required>
+       </div>
+       <div>
+           <label for="email" class="form-label"> Email</label>
+           <input type="email" class="form-control" id="email" name="email" placeholder="" value="{{email}}" required>
+       </div>
+
+        <div class="check-group" id="buildings">
+            <p>My dietaries:</p>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Vegetarian" id="vegetarian" name="dietarypreference" {{vegetarian}}>
+                <label class="form-check-label" for="vegetarian">
+                    Vegetarian
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Vegan" id="vegan" name="dietarypreference" {{vegan}}>
+                <label class="form-check-label" for="vegan">
+                    Vegan
+                </label>
+            </div>
+                       <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Gluten Free" id="gluten" name="dietarypreference" {{glutenfree}}>
+                <label class="form-check-label" for="gluten">
+                    Gluten Free
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Dairy Free" id="dairy" name="dietarypreference" {{dairyfree}}>
+                <label class="form-check-label" for="dairy">
+                    Dairy Free
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Nut Free" id="nuts" name="dietarypreference" {{nutfree}}>
+                <label class="form-check-label" for="nuts">
+                    Nut Free
+                </label>
+            </div>
+        </div>
+       <div>
+           <label for="password" class="form-label"> Password</label>
+           <input type="password" class="form-control" id="password" name="Password" placeholder="" value="melanie" required>
+       </div>
+       <div>
+           <label for="confirmpassword" class="form-label">Confirm</label>
+           <input type="password" class="form-control" id="confirmpassword" name="Confirm password" placeholder="" value="melanie" required>
+       </div>
+           <div id="confirmmessage" class="alert"> Currently, your passwords do not match </div>
+        <div class="text-end">
+          <button type="reset" class="btn btn-primary">Reset</button>
+          <button id="submit" type="submit" class="btn btn-primary" >Submit</button>
+        </div>
+       </form>
+</div>
+
+<script>
+    let pw = document.querySelector("#password");
+    let confirm = document.querySelector("#confirmpassword");
+    let message = document.querySelector("#confirmmessage");
+    let submit = document.querySelector("#submit");
+    console.log(pw);
+    submit.disabled = true;
+    console.log(confirm.value);
+    message.style.display = "block";
+
+    pw.addEventListener('keyup', check_match);
+    confirm.addEventListener('keyup', check_match)
+
+    function check_match(){
+        if( pw.value === confirm.value){
+            submit.disabled = false;
+            message.style.display = "none";
+        }else{
+            submit.disabled = true;
+            message.style.display = "block";
+        }
+    }
+    check_match()
+</script>
+{% endblock %}
