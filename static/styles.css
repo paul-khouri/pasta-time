@@ -122,12 +122,10 @@ background-color:var(--brand-green-pale);
 }
 /* ---- form ----- */
 
-label, input[type='text'], input[type='email'],input[type='password'], input[type="checkbox"]{
-font-size: 1.5em;
+label, input[type='text'], input[type='email'], textarea{
+font-size: 1.5em !important;
 }
-.form-check-input[type="checkbox"]{
-margin: 0 1em 0 0em;
-}
+
 
 form p{
 font-size: 1.5em;

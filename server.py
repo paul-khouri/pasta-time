@@ -22,37 +22,22 @@ def combos():
 def signup():
     if request.method == "POST":
         f = request.form
-        fn = f.get('firstname')
-        sn = f.get('secondname')
-        em = f.get('email')
-        dp = f.getlist('dietarypreference')
-        # prep form data if needed again
-        form_data={}
-        for k, v in f.items():
-            if k != "dietarypreference":
-                form_data[k] = v
-            else:
-                dp = f.getlist('dietarypreference')
-                for p in dp:
-                    form_data[p.lower().replace(" ", "")] = "checked"
-        print(form_data)
-        return render_template("confirm.html", fn=fn, sn=sn, em=em, dp=dp, form_data=form_data)
+        return render_template("confirm.html", form_data=f)
     elif request.method == "GET":
         carried_data = request.args
-        #print(type(carried_data))
-        #print(len(carried_data))
-
+        print(carried_data)
         if len(carried_data) == 0:
-            form_data = {
-                "firstname": "Paul",
-                "secondname": "Jones",
-                "email": "dp@c.com",
-                "vegan": "checked"
+            temp_form_data={
+                "firstname" : "James",
+                "secondname" : "Lovelock",
+                "email": "jl@gmail.com",
+                "aboutme" : "I have been in love with Italian food all my life"
             }
+            #temp_form_data = {}
         else:
-            print(carried_data)
-            form_data=carried_data
-        return render_template("signup.html", **form_data)
+            temp_form_data= carried_data
+        return render_template("signup.html", **temp_form_data)
+
 
 
 if __name__ == "__main__":

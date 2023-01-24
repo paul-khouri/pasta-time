@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Join up
+Join up Confirmation
 {% endblock %}
 
 {% block banner %}
@@ -14,32 +14,32 @@ static/images/small_banner.svg
 table{
 margin:auto;
 }
-  td{
-  font-size:1.5em;
-  padding: 0.25em;
-  border-bottom: 1px solid gray;
-  }
-  td:first-child{
-  text-align:right;
-  font-weight:bold;
-  }
-
-
+td{
+font-size:1.5em;
+padding: 0.25em;
+border-bottom: 1px solid gray;
+}
+td:first-child{
+text-align:right;
+font-weight:bold;
+}
 </style>
 <div class="container-lg">
   <h1>Your details</h1>
-<table>
-  <tr><td> First Name: </td><td> {{fn}} </td></tr>
-  <tr><td> Second Name: </td><td> {{sn}} </td></tr>
-  <tr><td> Email: </td><td> {{em}} </td></tr>
-  {% for p in dp %}
-  <tr><td> Dietary: </td> <td> {{p}} </td></tr>
-{% endfor %}
-</table>
+  <table>
+    <tr> <td>First Name</td> <td> {{ form_data['firstname'] }} </td></tr>
+    <tr> <td>Second Name</td> <td>  {{ form_data['secondname'] }} </td></tr>
+     <tr> <td>Email</td> <td>  {{ form_data['email'] }} </td></tr>
+     <tr> <td>About Me</td> <td>  {{ form_data['aboutme'] }} </td></tr>
+  </table>
+
+
+
+
   <div class="text-center">
   <a href="{{ url_for('index') }}" class="btn btn-primary">Cancel</a>
   <a href="{{ url_for('index') }}" class="btn btn-primary">Confirm</a>
-  <a href="{{ url_for('signup', **form_data  )}}" class="btn btn-primary">Edit</a>
+  <a href="{{ url_for('signup', **form_data)}}" class="btn btn-primary">Edit</a>
     </div>
   </div>
 
