@@ -17,6 +17,10 @@ def menu():
 def combos():
     return render_template("combos.html")
 
+@app.route('/news')
+def news():
+    return render_template("news.html")
+
 
 @app.route('/signup', methods=["GET", "POST"])
 def signup():

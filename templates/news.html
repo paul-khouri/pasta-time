@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Our News
+{% endblock %}
+
+{% block banner %}
+static/images/small_banner.svg
+{% endblock %}
+
+
+{% block content %}
+<style>
+    .subtitle{
+        font-size: 1.5em;
+        border-bottom: 1px solid gray;
+        color: gray;
+    }
+    h2{
+        border-bottom: 1px solid gray;
+    }
+    .news{
+        max-width: 600px;
+        margin: auto;
+        background-color: var(--brand-paper);
+        border-radius: 2em;
+        filter: drop-shadow(0.25em 0.25em 0.25em rgba(0,0,0,0.5));
+    }
+    .news-text{
+        font-size: 1.25em;
+    }
+    .news-meta{
+        text-align: end;
+        font-weight: bold;
+    }
+
+
+</style>
+<div class="container-lg py-sm-5 py-1">
+    <h1> News</h1>
+    <div class="news p-4 my-4">
+        <h2> Pasta Happy Hour!</h2>
+        <div class="subtitle"> Every Thursday from 5:00 to 6:30, 15% off any of our Combos</div>
+        <p class="news-text">That's right, it's real! Drop in early with your workmates
+            and have a great feed at a discount price.</p>
+        <div class="news-meta"> Posted by Mike 23 April 2023 </div>
+        <div class="news-meta">
+            <a class="btn btn-primary" href="">Update</a>
+            <a class="btn btn-primary" href="">Delete</a>
+        </div>
+    </div>
+        <div class="news p-4 my-4">
+        <h2> Tasting Night</h2>
+        <div class="subtitle">Come in and try some new dishes that might end up on our menu.</div>
+        <p class="news-text">
+            Jack, our chef, has been working with his team to design some new dishes.
+            He has recently returned from Italy and visited many of Italy's best pasta bars.
+            If you would like to be part of our customer tasting panel please put a comment
+            below and we'll get back to you.
+        </p>
+        <div class="news-meta"> Posted by Mike 23 April 2023 </div>
+        <div class="news-meta">
+            <a class="btn btn-primary" href="">Update</a>
+            <a class="btn btn-primary" href="">Delete</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
