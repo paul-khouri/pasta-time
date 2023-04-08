@@ -35,6 +35,10 @@ h1{
     font-weight: 600;
     margin: 0;
 }
+
+h2{
+    border-bottom: 1px solid gray;
+}
 /* ---------- */
 
 
@@ -62,7 +66,27 @@ h1{
     padding: 1em 0 1em 0;
 }
 
-/* ---------- */
+/* -----news page----- */
+.subtitle{
+    font-size: 1.5em;
+    border-bottom: 1px solid gray;
+    color: gray;
+}
+
+.news{
+    max-width: 600px;
+    margin: auto;
+    background-color: var(--brand-paper);
+    border-radius: 2em;
+    filter: drop-shadow(0.25em 0.25em 0.25em rgba(0,0,0,0.5));
+}
+.news-text{
+    font-size: 1.25em;
+}
+.news-meta{
+    text-align: end;
+    font-weight: bold;
+}
 
 
 /* -- images --- */
@@ -137,7 +161,7 @@ margin-bottom: 1em;
 }
 
 .btn{
-font-size: 1em;
+font-size: 1.3em;
     --bs-btn-padding-y:0.1em;
 }
 

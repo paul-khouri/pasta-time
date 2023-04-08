@@ -20,12 +20,20 @@ def get_news(db_path):
     :param db_path:
     :return:
     """
-    sql = "select *, (select name from member where member.member_id = news.member_id) as 'member name' from news;"
+    sql = """select news.title, news.subtitle, news.content, news.newsdate, member.name
+    from news
+    join member on news.member_id= member.member_id
+    """
     result = run_search_query_tuples(sql, (), db_path, True)
-    for x in result:
-        print(x['title'])
-        print(x['subtitle'])
-        print(x['member name'])
+    for r in result:
+        for k in r.keys():
+            output = "Key: {} , Value: {}".format(k, r[k])
+            print(output)
+
+
+
+
+
 
 
 
