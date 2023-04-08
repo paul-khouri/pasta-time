@@ -13,7 +13,7 @@ static/images/small_banner.svg
 <div class="container-lg py-sm-5 py-1">
 
   <div class="news p-4 my-4">
-    <form action="" method="POST">
+    <form action="{{url_for('news_cud', id=id, task=task)}}" method="POST">
         <div>
             <label for="title" class="form-label">Title</label>
             <input type="text" class="form-control" id="title" name="title" placeholder="" value="{{title}}" required>
