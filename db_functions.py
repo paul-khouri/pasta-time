@@ -3,7 +3,7 @@ import csv
 import string #for strip
 
 def run_commit_query(sql_query,values_tuple, file_path):
-    """Run a query that makes achange to the database
+    """Run a query that makes a change to the database
 
     :param (str) sql_query: str
     :param (tuple) values_tuple: tuple (can be empty)
