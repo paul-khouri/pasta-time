@@ -2,9 +2,9 @@ import sqlite3
 import csv
 import string #for strip
 
+
 def run_commit_query(sql_query,values_tuple, file_path):
     """Run a query that makes a change to the database
-
     :param (str) sql_query: str
     :param (tuple) values_tuple: tuple (can be empty)
     :param (str) file_path: str
@@ -40,10 +40,10 @@ def run_commit_query(sql_query,values_tuple, file_path):
 
 def run_search_query_tuples(sql_query,values_tuple, file_path, rowfactory=False):
     """Run a query
-
     :param (str) sql_query: str
     :param (tuple) values_tuple: tuple (can be empty)
     :param (path) file_path: str
+    :param (bool) rowfactory: bool
     :return: (tuple) result
     """
     result = None
@@ -69,7 +69,6 @@ def run_search_query_tuples(sql_query,values_tuple, file_path, rowfactory=False)
 
 def file_reader(f):
     """Read a csv file (may not be necessary, but here if needed
-
     :param (str) f: file path
     :return: (list) 2D list: each row of the csv file split up by cells
     """
@@ -92,8 +91,8 @@ def file_reader(f):
 def execute_external_script(sql_script_path, db_path):
     """Read a sql file and use to create a database
 
-    :param sql_script_path: str (path to sql file)
-    :param db_path: str (path to db dile)
+    :param (str) sql_script_path: str (path to sql file)
+    :param (str) db_path: str (path to db file)
     :return: bool
     """
     try:
