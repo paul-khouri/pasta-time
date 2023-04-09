@@ -10,7 +10,7 @@ drop table if exists member;
 
 create table member(
     member_id integer primary key autoincrement not null,
-    name text not null unique,
+    name text not null,
     email text not null unique,
     password text not null,
     authorisation integer not null
@@ -23,7 +23,7 @@ create table news(
     subtitle text not null unique,
     content text not null unique,
     newsdate date not null,
-    member_id date not null,
+    member_id integer not null,
     foreign key(member_id) references member(member_id)
 );
 
