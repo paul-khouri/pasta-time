@@ -26,6 +26,7 @@ def menu():
 def combos():
     return render_template("combos.html")
 
+
 @app.route('/news')
 def news():
     # -------------
@@ -93,9 +94,6 @@ def news_cud():
             result = run_commit_query(sql, values_tuple, db_path)
             # collect the data from the form and update the database at the sent id
             return redirect(url_for('news'))
-
-
-
 
 
 @app.route('/signup', methods=["GET", "POST"])
