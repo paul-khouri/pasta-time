@@ -145,7 +145,7 @@ background-color:var(--brand-green-pale);
 }
 /* ---- form ----- */
 
-label, input[type='text'], input[type='email'], textarea{
+label, input[type='text'], input[type='email'], input[type='password'], textarea{
 font-size: 1.5em !important;
 }
 

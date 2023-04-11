@@ -113,6 +113,33 @@ def news_cud():
             return render_template('error.html', message=message)
 
 
+@app.route('/login', methods=["GET","POST"])
+def login():
+    if request.method == "GET":
+        return render_template("log-in.html")
+    elif request.method == "POST":
+        f=request.form
+        print(f)
+        sql= """ select name, password, authorisation from member where email = ? """
+        values_tuple=(f['email'],)
+        result = run_search_query_tuples(sql, values_tuple, db_path, True)
+        print(result)
+        if result:
+            print("have a result")
+            result = result[0]
+            if result['password'] == f['password']:
+                print("yep all okay")
+                return render_template("log-in.html")
+            else:
+                error = "Your credentials are not recognised"
+                return render_template("log-in.html", error=error)
+        else:
+            error = "Your credentials are not recognised"
+            return render_template("log-in.html", error=error)
+        # test if form password matches stored password
+
+
+
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
