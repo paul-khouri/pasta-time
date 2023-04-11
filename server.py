@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 from db_functions import run_search_query_tuples, run_commit_query
 from datetime import datetime
 
 app = Flask(__name__)
+app.secret_key = "sgdjkdgjdfgkdjfgk"
 db_path = 'data/pasta_db.sqlite'
 
 
@@ -116,7 +117,7 @@ def news_cud():
 @app.route('/login', methods=["GET","POST"])
 def login():
     if request.method == "GET":
-        return render_template("log-in.html")
+        return render_template("log-in.html", email='m@g.com', password='temp')
     elif request.method == "POST":
         f=request.form
         print(f)
@@ -129,7 +130,9 @@ def login():
             result = result[0]
             if result['password'] == f['password']:
                 print("yep all okay")
-                return render_template("log-in.html")
+                session['name'] = result['name']
+                session['authorisation'] = result['authorisation']
+                return redirect(url_for('index'))
             else:
                 error = "Your credentials are not recognised"
                 return render_template("log-in.html", error=error)
@@ -139,6 +142,10 @@ def login():
         # test if form password matches stored password
 
 
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
 
 @app.route('/signup', methods=["GET", "POST"])
 def signup():

@@ -1,9 +1,8 @@
 import sqlite3
 import csv
-import string #for strip
 
 
-def run_commit_query(sql_query,values_tuple, file_path):
+def run_commit_query(sql_query, values_tuple, file_path):
     """Run a query that makes a change to the database
     :param (str) sql_query: str
     :param (tuple) values_tuple: tuple (can be empty)
@@ -38,7 +37,7 @@ def run_commit_query(sql_query,values_tuple, file_path):
     return True
 
 
-def run_search_query_tuples(sql_query,values_tuple, file_path, rowfactory=False):
+def run_search_query_tuples(sql_query, values_tuple, file_path, rowfactory=False):
     """Run a query
     :param (str) sql_query: str
     :param (tuple) values_tuple: tuple (can be empty)
@@ -53,10 +52,10 @@ def run_search_query_tuples(sql_query,values_tuple, file_path, rowfactory=False)
         if rowfactory:
             db.row_factory = sqlite3.Row
         cursor = db.cursor()
-        #print("connection successful")
-        cursor.execute(sql_query,values_tuple)
+        # print("connection successful")
+        cursor.execute(sql_query, values_tuple)
         result = cursor.fetchall()
-        #print("Search Query executed")
+        # print("Search Query executed")
         cursor.close()
     except sqlite3.Error as error:
         print("Error running search query tuples: {}".format(error))
@@ -75,14 +74,14 @@ def file_reader(f):
     # holds all the data
     collected_data = []
     # get the file
-    with open(f , mode='r', encoding='utf-8-sig') as csv_file:
-        csv_read = csv.reader(csv_file, delimiter = "," , quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    with open(f, mode='r', encoding='utf-8-sig') as csv_file:
+        csv_read = csv.reader(csv_file, delimiter=",", quotechar='"', quoting=csv.QUOTE_MINIMAL)
         count = 0
         # loop through the rows
         for row in csv_read:
             # add each row split and stripped as a list
-            collected_data.append( [x.strip() for x in row] )
-            count+=1
+            collected_data.append([x.strip() for x in row])
+            count += 1
     print(count)
     # return the 2D list
     return collected_data
@@ -100,7 +99,7 @@ def execute_external_script(sql_script_path, db_path):
         conn = sqlite3.connect(db_path)
         # the cursor allows us to do things with the database
         cursor = conn.cursor()
-        #print("connection successful")
+        # print("connection successful")
         # open and read the sql file
         sql_query = open(sql_script_path)
         sql_string = sql_query.read()
@@ -108,7 +107,7 @@ def execute_external_script(sql_script_path, db_path):
         cursor.executescript(sql_string)
         # commit (aka save) what has been done
         conn.commit()
-        #print("Query executed")
+        # print("Query executed")
         # shut down the cursor
         cursor.close()
     except sqlite3.Error as error:
@@ -126,4 +125,39 @@ def execute_external_script(sql_script_path, db_path):
 if __name__ == "__main__":
     sql_path = 'data/create_db.sql'
     db_path = 'data/pasta_db.sqlite'
-    execute_external_script(sql_path,db_path)
+    execute_external_script(sql_path, db_path)
+    f = "data/pasta.csv"
+    data = file_reader(f)
+    sql = "insert into food(title, price, description, type)values(?,?,?,?)"
+    for d in data:
+        run_commit_query(sql, tuple(d), db_path)
+    combos = [
+        ('Classic', 'Old school Italian pasta dinner', 4),
+        ('Allergy free', 'This dinner combo is nut free, dairy free, gluten free and vegan', 4),
+        ('Padua', 'A North Italian selection', 4),
+        ('Sienna', 'A simple selection for a night at home', 2),
+    ]
+    sql = "insert into combo(name, description, feeds)values(?,?,?)"
+    for c in combos:
+        run_commit_query(sql, c, db_path)
+    combo_menu = {
+        'Classic': ['CONCHIGLIE ALLA BOLOGNESE', 'FETTUCCINE CARBONARA',
+                    'CASARECCE PRIMAVERA', 'RAVIOLI DI RICOTTA', '1154 GARLIC & ROSEMARY ROLL',
+                    'MARINATED OLIVES', 'PANNA COTTA', 'TORTA CIOCCOLATO'],
+        'Allergy free': ['VEGAN AGLIO OLIO', 'VEGAN VESUVIANA', 'VEGAN POMODORO', 'VEGAN PESTO',
+                         'GREENS', 'TORTA CIOCCOLATO'],
+        'Padua': ['FUSILLI ALLA VODKA', 'SPAGHETTI AGLIO OLIO E GAMBERETTI', 'RIGATONI POMODORO',
+                  'RAVIOLI DI RICOTTA', 'GIARDINIERA', 'ROCKET', 'PANNA COTTA', 'TORTA CIOCCOLATO'],
+        'Sienna': ['LINGUINE VESUVIANA', 'RIGATONI POMODORO', 'MARINATED OLIVES', 'ROCKET', 'PANNA COTTA']
+    }
+    # for combo, dishes in the dictionary
+    # select to get id of combo
+    # loop through dishes and get ids
+    for combo, dishes in combo_menu.items():
+        for d in dishes:
+            sql = """insert into combo_menu(combo_id, food_id)values(
+            (select combo_id from combo where name=?), (select food_id from food where title =?)
+            )
+            """
+            values_tuple = (combo, d)
+            run_commit_query(sql, values_tuple, db_path)

@@ -170,12 +170,17 @@ color: red;
 text-align:center;
 font-size: 1.5em;
 }
-
+/* -- alerts and sessions --- */
 .alert{
 color: red;
 text-align:center;
 font-size: 1.5em;
-
+}
+.session{
+background-color: darkorchid;
+color: white;
+text-align:center;
+font-size: 1.5em;
 }
 
 

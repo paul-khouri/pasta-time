@@ -2,8 +2,34 @@
 
 drop table if exists news;
 drop table if exists member;
+drop table if exists food;
+drop table if exists combo;
+drop table if exists combo_menu;
 
 /* create tables */
+create table food(
+  food_id integer primary key autoincrement not null,
+    title text not null unique,
+    price real not null,
+    description text unique,
+    type text not null,
+    image text
+);
+
+create table combo(
+    combo_id integer primary key autoincrement not null,
+    name text not null unique,
+    description text not null unique,
+    feeds integer not null
+);
+
+create table combo_menu(
+    combo_id integer not null,
+    food_id integer not null,
+    foreign key (combo_id) references combo(combo_id),
+    foreign key (food_id) references food(food_id),
+    primary key (combo_id,food_id)
+);
 
 create table member(
     member_id integer primary key autoincrement not null,
@@ -22,6 +48,8 @@ create table news(
     member_id integer not null,
     foreign key(member_id) references member(member_id)
 );
+
+
 
 insert into member( name, email, password, authorisation)
 values('Mike', 'm@g.com', 'temp', 0 );
@@ -52,3 +80,21 @@ values('Tasting Night!',
        '2023-03-12 17:45:00',
        (select member_id from member where name='Vanessa' )
        );
+
+insert into news(title, subtitle, content, newsdate, member_id)
+values('Party night!',
+       'Come along after hours next Saturday 5 May.',
+       'Meet the staff and enjoy value drinks and entree plates.' ,
+       '2023-01-30 10:45:00',
+       (select member_id from member where name='Mike' )
+       );
+
+insert into news(title, subtitle, content, newsdate, member_id)
+values('Date night!!',
+       'Bring your date for a couples night out.',
+       'Fixed price ($100.00) menu for two..' ,
+       '2023-02-23 10:45:00',
+       (select member_id from member where name='Vanessa' )
+       );
+
+
