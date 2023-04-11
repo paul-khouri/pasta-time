@@ -13,6 +13,7 @@ static/images/small_banner.svg
 <div class="container-lg py-sm-5 py-1">
 
   <div class="news p-4 my-4">
+      <h2>Please enter/update your news item</h2>
     <form action="{{url_for('news_cud', id=id, task=task)}}" method="POST">
         <div>
             <label for="title" class="form-label">Title</label>
@@ -24,7 +25,7 @@ static/images/small_banner.svg
         </div>
         <div>
              <label for="content" class="form-label">News content</label>
-            <textarea class="form-control" id="content" name="content" rows="7">{{content}}</textarea>
+            <textarea class="form-control" id="content" name="content" rows="7" required>{{content}}</textarea>
         </div>
         <div class="text-end">
             <button type="reset" class="btn btn-primary">Reset</button>

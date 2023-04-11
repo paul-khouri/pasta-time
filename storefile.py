@@ -79,7 +79,7 @@ def news_cud():
         if data['task'] == 'update':
             f = request.form
             print(f)
-            sql = """update news set title=?, subtitle=?, content=?, newsdate=datetime('now') where news_id=?"""
+            sql = """update news set title=?, subtitle=?, content=?, newsdate=datetime('now','localtime') where news_id=?"""
             values_tuple =(f['title'],f['subtitle'], f['content'], data['id'])
             result = run_commit_query(sql, values_tuple, db_path)
             # collect the data from the form and update the database at the sent id
@@ -89,7 +89,7 @@ def news_cud():
             print(f)
             # temporary member_id until we can do better
             sql = """insert into news(title,subtitle,content, newsdate, member_id) 
-            values(?,?,?, datetime('now'),2)"""
+            values(?,?,?, datetime('now', 'localtime'),2)"""
             values_tuple =(f['title'],f['subtitle'], f['content'])
             result = run_commit_query(sql, values_tuple, db_path)
             # collect the data from the form and update the database at the sent id
