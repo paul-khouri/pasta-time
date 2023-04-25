@@ -116,6 +116,7 @@ def news_cud():
 
 @app.route('/login', methods=["GET","POST"])
 def login():
+    print(session)
     if request.method == "GET":
         return render_template("log-in.html", email='m@g.com', password='temp')
     elif request.method == "POST":
@@ -145,7 +146,10 @@ def login():
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('index'))
+    referrer = request.referrer
+    print(referrer)
+    return redirect(referrer)
+    #return redirect(url_for('index'))
 
 
 @app.route('/signup', methods=["GET", "POST"])

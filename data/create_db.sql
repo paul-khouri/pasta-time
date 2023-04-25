@@ -5,6 +5,7 @@ drop table if exists member;
 drop table if exists food;
 drop table if exists combo;
 drop table if exists combo_menu;
+drop table if exists comment;
 
 /* create tables */
 create table food(
@@ -49,6 +50,16 @@ create table news(
     foreign key(member_id) references member(member_id)
 );
 
+create table comment(
+    comment_id integer primary key autoincrement not null,
+    news_id integer not null,
+    member_id integer not null,
+    comment text not null unique,
+    commentdate date not null,
+    foreign key(news_id) references news(news_id),
+    foreign key(member_id) references member(member_id)
+);
+
 
 
 insert into member( name, email, password, authorisation)
@@ -69,6 +80,27 @@ values('Pasta Happy Hour!',
        '2023-03-04 20:30:00',
        (select member_id from member where name='Mike' )
        );
+/* comments for Pasta Happy Hour */
+insert into comment(news_id, member_id, comment, commentdate)
+values( (select news_id from news where title='Pasta Happy Hour!'),
+       (select member_id from member where name='Suzie'),
+       'Hey! that sounds great. Can we bring non-members?',
+       '2023-03-05 20:30:00'
+      );
+insert into comment(news_id, member_id, comment, commentdate)
+values( (select news_id from news where title='Pasta Happy Hour!'),
+       (select member_id from member where name='Vanessa'),
+       'Hi Suzie it is for members, but if you have a non-member friend they can sign up before-hand',
+       '2023-03-05 21:30:00'
+      );
+insert into comment(news_id, member_id, comment, commentdate)
+values( (select news_id from news where title='Pasta Happy Hour!'),
+       (select member_id from member where name='Suzie'),
+       'Awesome! Thanks Vanessa',
+       '2023-03-05 21:40:00'
+      );
+
+
 
 insert into news(title, subtitle, content, newsdate, member_id)
 values('Tasting Night!',
@@ -80,6 +112,23 @@ values('Tasting Night!',
        '2023-03-12 17:45:00',
        (select member_id from member where name='Vanessa' )
        );
+
+/* comments for Tasting Night */
+insert into comment(news_id, member_id, comment, commentdate)
+values( (select news_id from news where title='Tasting Night!'),
+       (select member_id from member where name='Olivia'),
+       'Hi are there any pesto dishes, I just love pesto!',
+       '2023-03-14 09:30:00'
+      );
+
+insert into comment(news_id, member_id, comment, commentdate)
+values( (select news_id from news where title='Tasting Night!'),
+       (select member_id from member where name='Mike'),
+       'Hi Olivia, we are trialling a new pesto using a New Zealand made peccorino'||
+       ' and a couple of secret ingredients. Hope you can make it as we want to'||
+       ' know what you think',
+       '2023-03-14 15:00:00'
+      );
 
 insert into news(title, subtitle, content, newsdate, member_id)
 values('Party night!',
