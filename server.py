@@ -147,8 +147,11 @@ def logout():
     session.clear()
     return redirect(url_for('index'))
 
+
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
+    referrer = request.referrer
+    print(referrer)
     if request.method == "POST":
         f = request.form
         return render_template("confirm.html", form_data=f)
@@ -170,3 +173,4 @@ def signup():
 
 if __name__ == "__main__":
     app.run(debug=True)
+    # app.run(debug=True, host='0.0.0.0', port=80)

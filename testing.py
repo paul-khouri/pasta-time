@@ -16,13 +16,14 @@ def get_news(db_path):
 
 def get_menu(db_path):
     sql = """select title, description, price, type from food"""
-    result = run_search_query_tuples(sql,(), db_path, True)
+    result = run_search_query_tuples(sql, (), db_path, True)
     for row in result:
         temp = ""
         for k in row.keys():
             temp += str(row[k])
             temp += ', '
         print(temp)
+
 
 def get_combos(db_path):
     sql = """select name, description, feeds from combo"""
@@ -33,6 +34,7 @@ def get_combos(db_path):
             temp += str(row[k])
             temp += ', '
         print(temp)
+
 
 def get_combo_menu(db_path):
     sql = """select combo.name, combo.description, combo.feeds, food.title, food.price, food.type
@@ -50,12 +52,9 @@ def get_combo_menu(db_path):
         print(output)
 
 
-
-
-
-
 if __name__ == "__main__":
     db_path = 'data/pasta_db.sqlite'
-    #get_menu(db_path)
-    #get_combos(db_path)
-    get_combo_menu(db_path)
+    get_news(db_path)
+    # get_menu(db_path)
+    # get_combos(db_path)
+    # get_combo_menu(db_path)

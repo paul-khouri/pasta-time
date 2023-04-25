@@ -55,7 +55,6 @@ h2{
     background-color: rgb(255,255,255);
     overflow: auto;
     margin-bottom: 2.5em;
-    
 }
 
 .col-lg-7, .col-lg-5{
@@ -95,17 +94,13 @@ h2{
     margin:auto;
     display: block;
 }
-/* ------- */
-
+/* --- footer ----*/
 .footer-content{
     background-color: var(--brand-green);
     text-align: center;
     padding: 0.5em 0 0.5em 0;
     color:white;
-    
 }
-
-
 .footer-content p:first-child{
     font-weight: 600;
     font-size: 1.5em;
@@ -149,12 +144,9 @@ label, input[type='text'], input[type='email'], input[type='password'], textarea
 font-size: 1.5em !important;
 }
 
-
 form p{
 font-size: 1.5em;
 }
-
-
 
 form div{
 margin-bottom: 1em;
@@ -184,30 +176,19 @@ font-size: 1.5em;
 }
 
 
-
-
+/* sizing down fonts for very small screens */
 @media only screen and (max-width: 768px) {
-    
     .body-text , .quote{
         font-size:1.5em;
     }
-    
     h1{
         font-size: 2em;
     }
- 
 }
-
-
-
+/* maximising images that are 80% when on larger screens */
 @media only screen and (max-width: 576px) {
-    
- 
     .part-img{
         max-width: 100%;
     }
-
-
-
 }
 
