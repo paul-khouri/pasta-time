@@ -10,5 +10,17 @@ static/images/small_banner.svg
 
 
 {% block content %}
-Menu page here
+<div class="container-lg">
+    <h1>Our Menu</h1>
+    {% set ns=namespace(type = "") %}
+    {% for row in menu %}
+    {% if ns.type != row['type'] %}
+    <h2 class="body-text menu-title"> {{ row['type'] }}</h2>
+        {% set ns.type=row['type'] %}
+    {% endif %}
+    <p class="body-text"> {{ row['title'] }}</p>
+    <p class="body-text"> {{ row['description'] }}</p>
+    <p class="body-text"> {{ row['price'] | make_price }}</p>
+    {% endfor %}
+</div>
 {% endblock %}

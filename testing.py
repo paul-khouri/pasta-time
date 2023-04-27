@@ -117,8 +117,8 @@ def get_comments_trial(db_path):
 if __name__ == "__main__":
     db_path = 'data/pasta_db.sqlite'
     # get_news(db_path)
-    # get_menu(db_path)
+    get_menu(db_path)
     # get_combos(db_path)
     # get_combo_menu(db_path)
     # get_comments(db_path)
-    get_comments_trial(db_path)
+    # get_comments_trial(db_path)

@@ -87,6 +87,14 @@ h2{
     font-weight: bold;
 }
 
+.menu-title{
+
+    border-bottom: 1px dotted black;
+    padding: 1em 0 0.5em 0;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
 
 /* -- images --- */
 .part-img{

@@ -14,6 +14,11 @@ def news_date(sqlite_dt):
     return x.strftime("%a %d %b %Y %H:%M %p")
 
 
+@app.template_filter()
+def make_price(p):
+    return "${:.2f}".format(p)
+
+
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -21,7 +26,9 @@ def index():
 
 @app.route('/menu')
 def menu():
-    return render_template("menu.html")
+    sql = """select title, description, price, type from food"""
+    result = run_search_query_tuples(sql, (), db_path, True)
+    return render_template("menu.html", menu=result)
 
 
 @app.route('/combos')
