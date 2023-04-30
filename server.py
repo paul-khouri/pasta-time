@@ -11,7 +11,7 @@ db_path = 'data/pasta_db.sqlite'
 def news_date(sqlite_dt):
     # create a date object
     x = datetime.strptime(sqlite_dt, '%Y-%m-%d %H:%M:%S')
-    return x.strftime("%a %d %b %Y %H:%M %p")
+    return x.strftime("%a %d %b %Y %I:%M %p")
 
 
 @app.template_filter()
@@ -38,20 +38,46 @@ def combos():
 
 @app.route('/news')
 def news():
-    # query for the page
-    sql = """select news.news_id, news.title, news.subtitle, news.content, news.newsdate, member.name
-       from news
-       join member on news.member_id= member.member_id
-       order by news.newsdate desc;
-       """
+    """Get all news items and comments
+
+    :return: template
+    """
+    # list to hold dictionary of news items and the comments
+    news_set = []
+    # get the news items in descending order
+    sql="""select news.news_id,news.title,news.subtitle, news.content, news.newsdate, member.name
+     from news
+     join member on member.member_id = news.member_id
+     order by newsdate desc
+     """
     result = run_search_query_tuples(sql, (), db_path, True)
-    print(result)
-    return render_template("news.html", news=result)
+    # for each news item
+    for row in result:
+        # start a dictionary to for the item
+        news_dict = {}
+        # loop and add keys and values
+        for k in row.keys():
+            news_dict[k] = row[k]
+        # the particular news item
+        # query all its comments in ascending order
+        sql = """select comment.comment_id, comment.comment, comment.commentdate, member.name
+        from comment
+        join member on comment.member_id = member.member_id
+        where comment.news_id = ?
+        order by comment.commentdate asc
+        """
+        values_tuple = (news_dict['news_id'],)
+        result = run_search_query_tuples(sql,values_tuple, db_path, True)
+        # add the list of the results to a new comments key
+        news_dict['comments'] = result
+        # add to news_set list
+        news_set.append(news_dict)
+    return render_template("news.html", news=news_set)
 
 
 @app.route('/news_cud', methods=['GET', 'POST'])
 def news_cud():
-    # colllect data from the web address
+    # collect data from the web address
     # this happens regardless of GET or POST
     data = request.args
     required_keys = ['id', 'task']
@@ -121,6 +147,40 @@ def news_cud():
             return render_template('error.html', message=message)
 
 
+@app.route('/comment_cud', methods=['GET','POST'] )
+def comment_cud():
+    # collect data from the web address
+    # this happens regardless of GET or POST
+    data = request.args
+    if request.method == "GET":
+        required_keys = ['id', 'task']
+    elif request.method == "POST":
+        required_keys = ['news_id', 'member_id', 'task']
+
+    # check that we have the required keys
+    # run error page if a problem
+    for k in required_keys:
+        if k not in data.keys():
+            message = "Do not know what to do with create read update on news (key not present)"
+            return render_template('error.html', message=message)
+    if request.method == "GET":
+        # is the task to delete ?
+        if data['task'] == 'delete':
+            sql = "delete from comment where comment_id = ?"
+            values_tuple = (data['id'],)
+            result = run_commit_query(sql, values_tuple, db_path)
+            return redirect(url_for('news'))
+    elif request.method == "POST":
+        f = request.form
+        if data['task'] == 'add':
+            sql = """insert into comment(news_id, member_id, comment, commentdate)
+            values(?, ?, ?, datetime('now', 'localtime'))
+            """
+            values_tuple = (data['news_id'],data['member_id'], f['comment'] )
+            result = run_commit_query(sql, values_tuple, db_path)
+            return redirect(url_for('news'))
+
+
 @app.route('/login', methods=["GET","POST"])
 def login():
     print(session)
@@ -129,7 +189,7 @@ def login():
     elif request.method == "POST":
         f=request.form
         print(f)
-        sql= """ select name, password, authorisation from member where email = ? """
+        sql= """ select member_id, name, password, authorisation from member where email = ? """
         values_tuple=(f['email'],)
         result = run_search_query_tuples(sql, values_tuple, db_path, True)
         print(result)
@@ -138,6 +198,7 @@ def login():
             result = result[0]
             if result['password'] == f['password']:
                 print("yep all okay")
+                session['id'] = result['member_id']
                 session['name'] = result['name']
                 session['authorisation'] = result['authorisation']
                 return redirect(url_for('index'))

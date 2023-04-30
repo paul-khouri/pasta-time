@@ -34,6 +34,31 @@ static/images/small_banner.svg
             <a class="btn btn-primary" href="{{ url_for('news_cud', id=row['news_id'], task='delete') }}">Delete</a>
         </div>
         {% endif %}
+        <h3>Comments</h3>
+        {% for comment in row['comments'] %}
+        <div class="comment">
+             <div>Posted by {{comment['name']}} on {{ comment['commentdate'] | news_date }} </div>
+            <div>{{ comment['comment'] }}</div>
+            <div >
+                <a class="btn btn-primary" href="{{ url_for('comment_cud', id=comment['comment_id'], task='delete') }}">X</a>
+            </div>
+        </div>
+        {% endfor %}
+
+                <div>
+            {% if session and session['authorisation'] in [0,1] %}
+            <form action="{{url_for('comment_cud', news_id=row['news_id'], member_id=session['id'],task='add')}}" method="POST">
+                <div>
+                    <label for="comment" class="form-label">Your comment</label>
+                    <textarea class="form-control" id="comment" name="comment" rows="1" required>{{content}}</textarea>
+                </div>
+                    <div class="text-end">
+                    <button  type="submit" class="btn btn-primary" >Submit</button>
+                </div>
+            </form>
+                {% endif %}
+
+        </div>
     </div>
     {% endfor %}
 

@@ -87,6 +87,26 @@ h2{
     font-weight: bold;
 }
 
+.comment{
+    background-color: rgba(255,255,255,0.75);
+    border-radius: 1em;
+    padding: 0.25em 0.5em 0.25em 0.5em;
+    margin-bottom: 0.5em;
+}
+.comment div:first-child{
+    text-align: end;
+    font-weight: bold;
+}
+.comment div:nth-child(2){
+    font-size: 1.25em;
+}
+
+.comment div:nth-child(3){
+    text-align: end;
+    font-size: 0.5em;
+}
+
+
 .menu-title{
 
     border-bottom: 1px dotted black;
