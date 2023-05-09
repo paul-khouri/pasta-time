@@ -41,6 +41,9 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ url_for('news') }}">News</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('members') }}">Members</a>
+        </li>
       </ul>
 
         <div class="ms-auto">
@@ -57,6 +60,7 @@
      {% if session %}
      <div class="session">
          {{ session['name'] }} is logged in and their authorisation is {{ session['authorisation']}}
+         and id is {{ session['id'] }}
      <br> The current session keys are {{session.keys()}}</div>
 
      {% endif %}

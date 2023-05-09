@@ -107,6 +107,15 @@ def get_comments_trial(db_path):
                     print(temp)
 
 
+def get_members(db_path):
+    sql = """select * from member"""
+    result = run_search_query_tuples(sql,(),db_path, True)
+    for row in result:
+        temp = ""
+        for k in row.keys():
+            temp += str(row[k])
+            temp += ', '
+        print(temp)
 
 
 
@@ -121,4 +130,5 @@ if __name__ == "__main__":
     # get_combos(db_path)
     # get_combo_menu(db_path)
     # get_comments(db_path)
-    get_comments_trial(db_path)
+    #get_comments_trial(db_path)
+    get_members(db_path)

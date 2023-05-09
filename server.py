@@ -7,6 +7,21 @@ app.secret_key = "sgdjkdgjdfgkdjfgk"
 db_path = 'data/pasta_db.sqlite'
 
 
+def log_in_check(auth=0):
+    """Check that id and authorisation in session keys
+    :param : auth (int) default = 0
+
+    :return: bool
+    """
+    if 'id' in session.keys() and 'authorisation' in session.keys():
+        if session['authorisation'] == auth:
+            return True
+        else:
+            return False
+    else:
+        return False
+
+
 @app.template_filter()
 def news_date(sqlite_dt):
     # create a date object
@@ -77,6 +92,10 @@ def news():
 
 @app.route('/news_cud', methods=['GET', 'POST'])
 def news_cud():
+    # basic log-in check
+    if not log_in_check():
+        error = "You are not authorised to access this page"
+        return render_template("error.html", message=error)
     # collect data from the web address
     # this happens regardless of GET or POST
     data = request.args
@@ -126,10 +145,10 @@ def news_cud():
         # print(f)
         if data['task'] == 'add':
             # add the new news entry to the database
-            # member is fixed for now
+            # have a guaranteed session id
             sql = """insert into news(title,subtitle,content, newsdate, member_id) 
-                        values(?,?,?, datetime('now', 'localtime'),2)"""
-            values_tuple = (f['title'], f['subtitle'], f['content'])
+                        values(?,?,?, datetime('now', 'localtime'),?)"""
+            values_tuple = (f['title'], f['subtitle'], f['content'], session['id'])
             result = run_commit_query(sql, values_tuple, db_path)
             # once added redirect to news page to see the newly added news item
             return redirect(url_for('news'))
@@ -155,6 +174,7 @@ def comment_cud():
     if request.method == "GET":
         required_keys = ['id', 'task']
     elif request.method == "POST":
+        # passed on form action
         required_keys = ['news_id', 'member_id', 'task']
 
     # check that we have the required keys
@@ -178,7 +198,7 @@ def comment_cud():
             """
             values_tuple = (data['news_id'],data['member_id'], f['comment'] )
             result = run_commit_query(sql, values_tuple, db_path)
-            return redirect(url_for('news'))
+            return redirect(url_for('news')+"#"+data['news_id'])
 
 
 @app.route('/login', methods=["GET","POST"])
@@ -241,6 +261,13 @@ def signup():
         else:
             temp_form_data = carried_data
         return render_template("signup.html", **temp_form_data)
+
+
+@app.route('/members')
+def members():
+    sql = """select * from member"""
+    result = run_search_query_tuples(sql, (), db_path, True)
+    return render_template("members.html", member=result)
 
 
 if __name__ == "__main__":
