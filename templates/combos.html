@@ -10,5 +10,23 @@ static/images/small_banner.svg
 
 
 {% block content %}
-Combo page here
+<div class="container-lg">
+    <h1>Our Combos</h1>
+    {% set ns=namespace(comboname = "", totalprice = 0) %}
+{% for row in combos %}
+        {% if ns.comboname != row['name'] %}
+    {% if not loop.first %}
+    <p class="body-text price-style"> <span>{{ns.totalprice | make_discount}}</span> </p>
+    {% endif %}
+    <h2 class="body-text menu-title"> {{ row['name'] }} <br> <span class="sub-text">({{ row['description'] }}) </span></h2>
+        {% set ns.comboname=row['name'] %}
+    {% endif %}
+<p class="body-text" style="margin:0;"> {{row['title']}}</p>
+<p class="body-text sub-text"> {{row['fooddescription']}} ({{row['price'] | make_price}})</p>
+    {% set ns.totalprice = ns.totalprice+row['price'] %}
+    {% if loop.last %}
+    <p class="body-text price-style"> <span>{{ns.totalprice | make_discount}}</span> </p>
+    {% endif %}
+{% endfor %}
+</div>
 {% endblock %}

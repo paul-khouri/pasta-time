@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from db_functions import run_search_query_tuples, run_commit_query
+from q_set import get_combo_menu
 from datetime import datetime
 
 app = Flask(__name__)
@@ -34,6 +35,11 @@ def make_price(p):
     return "${:.2f}".format(p)
 
 
+@app.template_filter()
+def make_discount(p):
+    discount = p*0.85
+    return "${:.2f} with 15% discount = ${:.2f}".format(p, discount)
+
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -48,7 +54,8 @@ def menu():
 
 @app.route('/combos')
 def combos():
-    return render_template("combos.html")
+    result = get_combo_menu(db_path)
+    return render_template("combos.html", combos=result)
 
 
 @app.route('/news')
