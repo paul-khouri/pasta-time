@@ -1,0 +1,12 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oleo+Script&display=swap');
+</style>
+
+font-family: 'Oleo Script', cursive;
+
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Zen+Antique+Soft&display=swap');
+</style>
+
+font-family: 'Zen Antique Soft', serif;

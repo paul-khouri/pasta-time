@@ -7,7 +7,7 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Zen+Antique+Soft&display=swap');
 body{
     font-family: 'Cormorant Garamond', serif;
     font-size: 100%;
@@ -41,6 +41,16 @@ body{
     padding: 0.5em 0 0.5em 0;
     border-top: 1px dotted black;
     border-bottom: 1px dotted black;
+}
+
+.banner-text{
+    font-family: 'Zen Antique Soft', serif;
+    font-size: 8em;
+    background-color: var(--brand-green);
+    margin-bottom: -0.01em;
+    padding:0 1em 0 0;
+    text-align: right;
+
 }
 
 h1{
@@ -184,6 +194,9 @@ height: 1.75rem;
     max-width: 75%;
     margin:auto;
     display: block;
+}
+.img-flip{
+    transform: scaleY(-1);
 }
 /* --- footer ----*/
 .footer-content{

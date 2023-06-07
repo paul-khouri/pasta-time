@@ -57,6 +57,8 @@
           </div>
 
 </nav>
+
+      <div class="banner-text"> 1789 Pasteria</div><img class="img-fluid" src="{% block banner %}{% endblock %}" alt="Banner">
      {% if session %}
      <div class="session">
          {{ session['name'] }} is logged in and their authorisation is {{ session['authorisation']}}
@@ -67,7 +69,8 @@
 
 
 
-    <img class="img-fluid" src="{% block banner %}{% endblock %}" alt="Banner">
+
+
 </div>
 
 {% block content %}
@@ -75,8 +78,9 @@
  {% endblock %}
 
 
-
+ <div> <img class="img-fluid img-flip" src="static/images/SVG/curve_slice.svg" alt="Banner"></div>
 <footer class="container-fluid footer-content">
+
         <p> 1789 Pastaria</p>
         <p>made with love</p>
         <div>&copy; 1789</div>
