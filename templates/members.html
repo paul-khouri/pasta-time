@@ -13,7 +13,9 @@ static/images/SVG/curve_slice.svg
     <table class="table body-text text-start">
         {% for row in member %}
         <tr><td>{{ row['member_id'] }}</td><td>{{ row['name'] }}</td><td>{{ row['email'] }}</td>
-            <td>{{ row['password'] }}</td><td>{{ row['authorisation'] }}</td></tr>
+            <td>{{ row['password'] }}</td><td>{{ row['authorisation'] }}</td><td>
+            <a class="icon-button delete-button" href="{{ url_for('news_cud', id=row['news_id'], task='update') }}"></a>
+            </td></tr>
         {% endfor %}
 
     </table>

@@ -17,6 +17,7 @@ static/images/SVG/curve_slice.svg
         {% if ns.comboname != row['name'] %}
     {% if not loop.first %}
     <p class="body-text price-style"> <span>{{ns.totalprice | make_discount}}</span> </p>
+    {% set ns.totalprice = 0 %}
     {% endif %}
     <h2 class="body-text menu-title"> {{ row['name'] }} <br> <span class="sub-text">({{ row['description'] }}) </span></h2>
         {% set ns.comboname=row['name'] %}

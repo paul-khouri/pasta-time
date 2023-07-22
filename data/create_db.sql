@@ -36,6 +36,7 @@ create table member(
     member_id integer primary key autoincrement not null,
     name text not null,
     email text not null unique,
+    bio text,
     password text not null,
     authorisation integer not null
 );
@@ -62,14 +63,14 @@ create table comment(
 
 
 
-insert into member( name, email, password, authorisation)
-values('Mike', 'm@g.com', 'temp', 0 );
-insert into member( name, email, password, authorisation)
-values('Vanessa', 'vanny@yahoo.com', 'temp', 0 );
-insert into member( name, email, password, authorisation)
-values('Olivia', 'olly66@marsden.com', 'temp', 1 );
-insert into member( name, email, password, authorisation)
-values('Suzie', 'zuzy@qmc.com', 'temp', 1 );
+insert into member( name, email, bio, password, authorisation)
+values('Mike', 'm@g.com','I own the place with Vanessa', 'temp', 0 );
+insert into member( name, email, bio, password, authorisation)
+values('Vanessa', 'vanny@yahoo.com','I own the place with Mike', 'temp', 0 );
+insert into member( name, email, bio, password, authorisation)
+values('Olivia', 'olly66@marsden.com','I am a media studies student', 'temp', 1 );
+insert into member( name, email,bio, password, authorisation)
+values('Suzie', 'zuzy@qmc.com', 'I am a law student','temp', 1 );
 
 
 insert into news(title, subtitle, content, newsdate, member_id)

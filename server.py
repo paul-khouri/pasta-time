@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from db_functions import run_search_query_tuples, run_commit_query
 from q_set import get_combo_menu
 from datetime import datetime
+from dateutil import tz
 
 app = Flask(__name__)
 app.secret_key = "sgdjkdgjdfgkdjfgk"
@@ -77,12 +78,12 @@ def news():
     for row in result:
         # start a dictionary to for the item
         news_dict = {}
-        # loop and add keys and values
+        # loop and add keys and values to a fresh , mutable dictionary
         for k in row.keys():
             news_dict[k] = row[k]
-        # the particular news item
+        # for the particular news item
         # query all its comments in ascending order
-        sql = """select comment.comment_id, comment.comment, comment.commentdate, member.name
+        sql = """select comment.comment_id, comment.comment, comment.commentdate, member.name, member.member_id
         from comment
         join member on comment.member_id = member.member_id
         where comment.news_id = ?
@@ -90,7 +91,7 @@ def news():
         """
         values_tuple = (news_dict['news_id'],)
         result = run_search_query_tuples(sql,values_tuple, db_path, True)
-        # add the list of the results to a new comments key
+        # add the list of the comments (immutable dictionary) to a new comments key
         news_dict['comments'] = result
         # add to news_set list
         news_set.append(news_dict)
@@ -183,7 +184,6 @@ def comment_cud():
     elif request.method == "POST":
         # passed on form action
         required_keys = ['news_id', 'member_id', 'task']
-
     # check that we have the required keys
     # run error page if a problem
     for k in required_keys:
@@ -208,10 +208,28 @@ def comment_cud():
             return redirect(url_for('news')+"#"+data['news_id'])
 
 
+@app.route('/members')
+def members():
+    sql = """select * from member"""
+    result = run_search_query_tuples(sql, (), db_path, True)
+    return render_template("members.html", member=result)
+
+
+@app.route('/member_cud', methods=['GET','POST'] )
+def member_cud():
+    return redirect(url_for('members'))
+
+
 @app.route('/login', methods=["GET","POST"])
 def login():
+    """Get log-in from user, test and respond
+
+    :return: template
+    """
+    # check current session status (should be empty)
     print(session)
     if request.method == "GET":
+        # go to log-in page with pre-filled values
         return render_template("log-in.html", email='m@g.com', password='temp')
     elif request.method == "POST":
         f=request.form
@@ -253,13 +271,23 @@ def signup():
     print(referrer)
     if request.method == "POST":
         f = request.form
-        return render_template("confirm.html", form_data=f)
+        sql = """insert into member(name, email, bio, password, authorisation)
+        values(?,?,?,?, 1)"""
+        values_tuple= (f['membername'],f['email'], f['aboutme'],f['password'])
+        result = run_commit_query(sql, values_tuple, db_path)
+        if result:
+            return render_template("log-in.html", email=f['email'])
+        else:
+            message = """Unfortunately, something went wrong. 
+                      Please make sure you have not signed up before 
+                      with the same email. """
+            return render_template('error.html',message=message)
     elif request.method == "GET":
         carried_data = request.args
         print(carried_data)
         if len(carried_data) == 0:
             temp_form_data = {
-                "firstname": "James",
+                "membername": "James",
                 "secondname": "Lovelock",
                 "email": "jl@gmail.com",
                 "aboutme": "I have been in love with Italian food all my life"
@@ -270,11 +298,7 @@ def signup():
         return render_template("signup.html", **temp_form_data)
 
 
-@app.route('/members')
-def members():
-    sql = """select * from member"""
-    result = run_search_query_tuples(sql, (), db_path, True)
-    return render_template("members.html", member=result)
+
 
 
 if __name__ == "__main__":

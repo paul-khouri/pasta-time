@@ -1,4 +1,6 @@
 from db_functions import run_search_query_tuples
+import os
+import re
 
 
 def get_news(db_path):
@@ -119,16 +121,41 @@ def get_members(db_path):
 
 
 
+def directory():
+    print(os.getcwd())
+    home = os.getcwd()
+    path_parent = os.path.dirname(os.getcwd())
+    print(path_parent)
+    dest_dir = home + "/static"
+    file_list = os.listdir(dest_dir)
+    for x in file_list:
+        y = re.search(r"\.svg$", x)
+        if y:
+            print(x)
+            print(y)
 
 
+def get_svg_list():
+    list_names=[]
+    home = os.getcwd()
+    dest_dir = home + "/static"
+    file_list = os.listdir(dest_dir)
+    for x in file_list:
+        y = re.search(r"\.svg$", x)
+        if y:
+            list_names.append(x)
+    return list_names
 
 
 if __name__ == "__main__":
     db_path = 'data/pasta_db.sqlite'
     # get_news(db_path)
-    # get_menu(db_path)
+    get_menu(db_path)
     # get_combos(db_path)
-    get_combo_menu(db_path)
+    # get_combo_menu(db_path)
     # get_comments(db_path)
     # get_comments_trial(db_path)
     # get_members(db_path)
+    # directory()
+    # print(get_svg_list())
+

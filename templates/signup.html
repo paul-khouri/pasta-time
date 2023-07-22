@@ -18,12 +18,8 @@ Join us to receive special offers, invitations to tasting nights and groovy Well
 <div class="container-lg p-3">
     <form action="{{ url_for('signup') }}" method="POST">
         <div>
-            <label for="firstname" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="" value="{{firstname}}" required>
-        </div>
-        <div>
-            <label for="secondname" class="form-label">Second Name</label>
-            <input type="text" class="form-control" id="secondname" name="secondname" placeholder="" value="{{secondname}}" required >
+            <label for="membername" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="membername" name="membername" placeholder="" value="{{membername}}" required>
         </div>
         <div>
             <label for="email" class="form-label">Email</label>
@@ -31,19 +27,50 @@ Join us to receive special offers, invitations to tasting nights and groovy Well
         </div>
         <div>
              <label for="aboutme" class="form-label">Tell us about yourself</label>
-            <textarea class="form-control" id="aboutme" name="aboutme" rows="7"> {{aboutme}}</textarea>
-
+            <textarea class="form-control" id="aboutme" name="aboutme" rows="3"> {{aboutme}}</textarea>
         </div>
+           <div>
+           <label for="password" class="form-label"> Password</label>
+           <input type="password" class="form-control" id="password" name="password" placeholder="" value="melanie" required>
+       </div>
+       <div>
+           <label for="confirmpassword" class="form-label"> Confirm</label>
+           <input type="password" class="form-control" id="confirmpassword" name="confirm password" placeholder="" value="giffiths" required>
+       </div>
+        <div id="confirmmessage" class="alert"> Currently, your passwords do not match </div>
 
         <div class="text-end">
           <button type="reset" class="btn btn-primary">Reset</button>
-          <button  type="submit" class="btn btn-primary" >Submit</button>
+          <button id="submit" type="submit" class="btn btn-primary" >Submit</button>
         </div>
 
 
     </form>
 
 </div>
+<script>
+    let pw = document.querySelector("#password");
+    let confirm = document.querySelector("#confirmpassword");
+    let message = document.querySelector("#confirmmessage");
+    let submit = document.querySelector("#submit");
+    console.log(pw);
+    submit.disabled = true;
+    console.log(confirm.value);
+    message.style.display = "block";
+
+    pw.addEventListener('keyup', check_match);
+    confirm.addEventListener('keyup', check_match)
+
+    function check_match(){
+        if( pw.value === confirm.value){
+            submit.disabled = false;
+            message.style.display = "none";
+        }else{
+            submit.disabled = true;
+            message.style.display = "block";
+        }
+    }
+</script>
 
 
 {% endblock %}

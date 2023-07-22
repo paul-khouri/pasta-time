@@ -38,8 +38,10 @@ static/images/SVG/curve_slice.svg
         <div class="comment">
              <div>Posted by {{comment['name']}} on {{ comment['commentdate'] | news_date }} </div>
             <div>{{ comment['comment'] }}</div>
-            <div >
+            <div>
+                {% if session['authorisation']== 0 or session['id'] == comment['member_id'] %}
                 <a class="icon-button delete-button small-icon-button" href="{{ url_for('comment_cud', id=comment['comment_id'], task='delete') }}"></a>
+                {% endif %}
             </div>
         </div>
         {% endfor %}

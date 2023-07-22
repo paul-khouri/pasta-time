@@ -197,6 +197,7 @@ height: 1.75rem;
 }
 .img-flip{
     transform: scaleY(-1);
+    margin-bottom: -0.1em;
 }
 /* --- footer ----*/
 .footer-content{
@@ -283,9 +284,14 @@ font-size: 1.5em;
     text-align:center;
     font-size: 1.5em;
     width: 300px;
-    display: none;
 }
+@media only screen and (max-width: 992px) {
 
+        .banner-text{
+        padding:0 0.2em 0 0;
+            font-size: 6em;
+    }
+}
 
 /* sizing down fonts for very small screens */
 @media only screen and (max-width: 768px) {
@@ -295,6 +301,14 @@ font-size: 1.5em;
     h1{
         font-size: 2em;
     }
+    .banner-text{
+        padding:0 0.2em 0 0;
+        font-size: 3em;
+    }
+    .price-style{
+        font-size: 1.25em;
+    }
+
 }
 /* maximising images that are 80% when on larger screens */
 @media only screen and (max-width: 576px) {
