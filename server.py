@@ -119,6 +119,10 @@ def news_cud():
     if request.method == "GET":
         # is the task to delete ?
         if data['task'] == 'delete':
+            #delete comments
+            sql = "delete from comment where news_id = ?"
+            values_tuple = (data['id'],)
+            result = run_commit_query(sql, values_tuple, db_path)
             sql = "delete from news where news_id = ?"
             values_tuple = (data['id'],)
             result = run_commit_query(sql, values_tuple, db_path)
